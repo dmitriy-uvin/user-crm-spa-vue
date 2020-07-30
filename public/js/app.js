@@ -2139,6 +2139,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2188,9 +2196,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     onKeyPress: function onKeyPress(event) {
-      console.log(event);
-      console.log(this.search);
-
       if (event.code === "Slash") {
         event.preventDefault();
         this.$refs.searchInput.focus();
@@ -40118,7 +40123,7 @@ var render = function() {
               ],
               ref: "searchInput",
               staticClass: "form-control",
-              attrs: { type: "text", placeholder: "'/' чтобы начать" },
+              attrs: { type: "text", placeholder: "'/' чтобы начать поиск" },
               domProps: { value: _vm.search },
               on: {
                 input: function($event) {
@@ -40221,105 +40226,115 @@ var render = function() {
                 _c("label", { attrs: { for: "more_18" } }, [_vm._v("После 18")])
               ])
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _vm._m(1)
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("table", { staticClass: "table" }, [
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.filteredUsers, function(user) {
-                return _c("tr", { key: user.id }, [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(user.id))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.email))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(user.age))]),
-                  _vm._v(" "),
-                  _c(
-                    "td",
-                    [
-                      user.avatar
-                        ? _c("img", {
-                            staticClass: "user-avatar",
-                            attrs: { src: user.avatar, alt: "" }
-                          })
-                        : _c("DefaultAvatar", {
-                            attrs: { userName: user.name }
-                          })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "modal",
-                          "data-target": "#deleteModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.onSelectUser(user)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-trash" })]
-                    ),
+        _c("div", { staticClass: "col-md-10" }, [
+          _vm.filteredUsers.length
+            ? _c("table", { staticClass: "table" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  [
+                    _vm._l(_vm.filteredUsers, function(user) {
+                      return _c("tr", { key: user.id }, [
+                        _c("th", { attrs: { scope: "row" } }, [
+                          _vm._v(_vm._s(user.id))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.name))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.age))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            user.avatar
+                              ? _c("img", {
+                                  staticClass: "user-avatar",
+                                  attrs: { src: user.avatar, alt: "" }
+                                })
+                              : _c("DefaultAvatar", {
+                                  attrs: { userName: user.name }
+                                })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "modal",
+                                "data-target": "#deleteModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onSelectUser(user)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-trash" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "modal",
+                                "data-target": "#editModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onSelectUser(user, "edit")
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-edit" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: {
+                                type: "button",
+                                "data-toggle": "modal",
+                                "data-target": "#viewModal"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.onSelectUser(user)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-eye" })]
+                          )
+                        ])
+                      ])
+                    }),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "modal",
-                          "data-target": "#editModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.onSelectUser(user, "edit")
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-edit" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-info",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "modal",
-                          "data-target": "#viewModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.onSelectUser(user)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fa fa-eye" })]
-                    )
-                  ])
-                ])
-              }),
-              0
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(2)
+                    !_vm.filteredUsers.length
+                      ? _c("tr", { staticClass: "text-center" }, [_vm._m(3)])
+                      : _vm._e()
+                  ],
+                  2
+                )
+              ])
+            : _c("h3", { staticClass: "text-center" }, [
+                _c("strong", [_vm._v("Пользователей не найдено :(")])
+              ])
+        ])
       ]),
       _vm._v(" "),
       _c("DeleteModal", {
@@ -40352,6 +40367,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("h4", [_vm._v("Новый пользователь")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          attrs: {
+            type: "button",
+            "data-toggle": "modal",
+            "data-target": "#addModal"
+          }
+        },
+        [
+          _c("i", { staticClass: "fa fa-plus" }),
+          _vm._v("\n                    Добавить\n                ")
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
         _c("th", { attrs: { scope: "col" } }, [_vm._v("#")]),
@@ -40372,24 +40411,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c("h4", [_vm._v("Новый пользователь")]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary",
-          attrs: {
-            type: "button",
-            "data-toggle": "modal",
-            "data-target": "#addModal"
-          }
-        },
-        [
-          _c("i", { staticClass: "fa fa-plus" }),
-          _vm._v("\n                Добавить\n            ")
-        ]
-      )
+    return _c("td", { attrs: { colspan: "6" } }, [
+      _c("strong", [_vm._v("Пользователей не найдено :(")])
     ])
   }
 ]

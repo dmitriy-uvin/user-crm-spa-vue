@@ -6,7 +6,7 @@
                 <div>
                     <strong>Поиск</strong>
                     <input type="text" v-model="search" class="form-control" ref="searchInput"
-                    placeholder="'/' чтобы начать">
+                    placeholder="'/' чтобы начать поиск">
                 </div>
                 <div class="mt-3">
                     <strong>Фильтры</strong>
@@ -24,9 +24,17 @@
                         </li>
                     </ul>
                 </div>
+                <div>
+                    <h4>Новый пользователь</h4>
+                    <button type="button" class="btn btn-primary"
+                            data-toggle="modal" data-target="#addModal">
+                        <i class="fa fa-plus"></i>
+                        Добавить
+                    </button>
+                </div>
             </div>
-            <div class="col-md-8">
-                <table class="table">
+            <div class="col-md-10">
+                <table class="table" v-if="filteredUsers.length">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -65,16 +73,16 @@
                             </button>
                         </td>
                     </tr>
+                    <tr v-if="!filteredUsers.length" class="text-center">
+                        <td colspan="6">
+                            <strong>Пользователей не найдено :(</strong>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col-md-2">
-                <h4>Новый пользователь</h4>
-                <button type="button" class="btn btn-primary"
-                        data-toggle="modal" data-target="#addModal">
-                    <i class="fa fa-plus"></i>
-                    Добавить
-                </button>
+                <h3 v-else class="text-center">
+                    <strong>Пользователей не найдено :(</strong>
+                </h3>
             </div>
         </div>
 
@@ -118,8 +126,6 @@ export default {
     },
     methods: {
         onKeyPress(event) {
-            console.log(event);
-            console.log(this.search);
             if (event.code === "Slash") {
                 event.preventDefault();
                 this.$refs.searchInput.focus();
