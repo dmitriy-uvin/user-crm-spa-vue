@@ -2138,6 +2138,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2186,6 +2187,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    onKeyPress: function onKeyPress(event) {
+      console.log(event);
+      console.log(this.search);
+
+      if (event.code === "Slash") {
+        event.preventDefault();
+        this.$refs.searchInput.focus();
+      }
+    },
     onSelectUser: function onSelectUser(user) {
       var _arguments = arguments,
           _this2 = this;
@@ -2247,7 +2257,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     filteredUsers: function filteredUsers() {
-      if (this.less_18 && this.more_18 || !this.less_18 && !this.more_18) {
+      if (this.less_18 && this.more_18) {
         return this.searchedUsers;
       } else if (this.less_18) {
         return this.searchedUsers.filter(function (user) {
@@ -2258,7 +2268,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           return user.age > 18;
         });
       }
+
+      return this.searchedUsers;
     }
+  },
+  created: function created() {
+    document.addEventListener('keypress', this.onKeyPress);
+  },
+  beforeDestroy: function beforeDestroy() {
+    document.removeEventListener('keypress', this.onKeyPress);
   }
 });
 
@@ -40098,8 +40116,9 @@ var render = function() {
                   expression: "search"
                 }
               ],
+              ref: "searchInput",
               staticClass: "form-control",
-              attrs: { type: "text" },
+              attrs: { type: "text", placeholder: "'/' чтобы начать" },
               domProps: { value: _vm.search },
               on: {
                 input: function($event) {

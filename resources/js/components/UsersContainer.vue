@@ -5,7 +5,8 @@
             <div class="col-md-2">
                 <div>
                     <strong>Поиск</strong>
-                    <input type="text" v-model="search" class="form-control">
+                    <input type="text" v-model="search" class="form-control" ref="searchInput"
+                    placeholder="'/' чтобы начать">
                 </div>
                 <div class="mt-3">
                     <strong>Фильтры</strong>
@@ -116,6 +117,14 @@ export default {
         await this.updateUsers();
     },
     methods: {
+        onKeyPress(event) {
+            console.log(event);
+            console.log(this.search);
+            if (event.code === "Slash") {
+                event.preventDefault();
+                this.$refs.searchInput.focus();
+            }
+        },
         async onSelectUser(user, type = null) {
             this.selectedUser = user;
 
@@ -138,7 +147,7 @@ export default {
             })
         },
         filteredUsers() {
-            if (this.less_18 && this.more_18 || !this.less_18 && !this.more_18) {
+            if (this.less_18 && this.more_18) {
                 return this.searchedUsers;
             } else if (this.less_18) {
                 return this.searchedUsers.filter(user => {
@@ -149,7 +158,14 @@ export default {
                     return user.age > 18;
                 });
             }
+            return this.searchedUsers;
         }
+    },
+    created() {
+        document.addEventListener('keypress', this.onKeyPress);
+    },
+    beforeDestroy() {
+        document.removeEventListener('keypress', this.onKeyPress);
     }
 }
 </script>
