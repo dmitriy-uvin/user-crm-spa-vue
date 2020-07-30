@@ -10,7 +10,7 @@ class GetUsersCollectionAction
 {
     public function execute()
     {
-        $users = User::all();
+        $users = User::orderBy('created_at', 'desc')->get();
         return new GetUsersCollectionResponse($users);
     }
 }
