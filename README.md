@@ -12,6 +12,7 @@ Features:
 - git clone https://github.com/dmitriy-sanders/user-crm-spa-vue
 - composer install
 - cp .env.example .env
+- chmod -R 777 storage/
 - npm install && npm run dev
 - php artisan key:generate
 - php artisan storage:link
