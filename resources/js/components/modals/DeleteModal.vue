@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         async deleteUserById() {
-            const response = await axios.delete(apiUsersUrl + this.user.id);
+            const response = await axios.delete(apiUsersUrl + "/" + this.user.id);
             $('#deleteModal').modal('hide');
             this.$emit('user-deleted');
         }

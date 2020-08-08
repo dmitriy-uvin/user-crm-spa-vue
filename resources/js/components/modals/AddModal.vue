@@ -57,7 +57,7 @@
                     <div class="form-group">
                         <label for="password">Аватар</label>
                         <input type="file" id="avatar" name="avatar" class="form-control"
-                        @change="selectFile">
+                               @change="selectFile">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -102,6 +102,7 @@ export default {
 
             axios.post(apiUsersUrl, userData)
                 .then((response) => {
+                    console.log(response);
                     this.name = this.email = this.password = this.avatar = this.age = null;
                     this.errors = {};
                     this.$emit('user-added');

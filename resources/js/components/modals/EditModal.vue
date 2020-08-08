@@ -125,7 +125,7 @@ export default {
                 userData.append('avatar', this.avatar);
             }
 
-            axios.post(apiUsersUrl + "update", userData)
+            axios.post(apiUsersUrl + "/update", userData)
                 .then((response) => {
                     this.avatar = null;
                     this.errors = {};
